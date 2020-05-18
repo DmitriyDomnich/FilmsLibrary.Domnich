@@ -10,5 +10,7 @@ namespace Web.DAL.Models
         public DateTime ReleaseDate { get; set; }
 
         public string Country { get; set; }
+
+        public string Director { get; set; }
     }
 }
