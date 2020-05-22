@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web.DAL;
 
 namespace Web.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200522143925_AddRoleTable")]
+    partial class AddRoleTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,98 +34,6 @@ namespace Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Боевик"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Вестерн"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Гангстерский фильм"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Детектив"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Исторический фильм"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Комедия"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Мелодрама"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Мюзикл"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Нуар"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Политический фильм"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Name = "Приключение"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Name = "Триллер"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Name = "Трагедия"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Name = "Фантастика"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Name = "Ужасы"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Name = "Фильм-катастрофа"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Name = "Документальный"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Name = "Биографический"
-                        });
                 });
 
             modelBuilder.Entity("Web.DAL.Models.ListOrder", b =>
