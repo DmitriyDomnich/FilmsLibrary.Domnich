@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Web.ViewModels.MovieListViewModel>
+@{
+    ViewData["Title"] = "Admin page";
+}
+
+<h1>Admin page</h1>
+<a asp-action="AddMovie">Добавить фильм</a>
+<table class="table">
+    <tr>
+        <td>Название</td>
+        <td>Жанры</td>
+        <td>Дата выпуска</td>
+        <td>Страна</td>
+        <td>Режиссёр</td>
+        <td>Цена</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            @{
+                string genres = String.Join(", ", item.MovieGenres);
+            }
+            <td>@genres</td>
+            <td>@item.ReleaseDate.ToString("MM/dd/yyyy")</td>
+            <td>@item.Country</td>
+            <td>@item.Director</td>
+            <td>@item.Price</td>
+            <td><a class="btn btn-outline-warning" asp-action="UpdateMovieView" asp-route-id="@item.Id">Редактировать</a></td>
+            <td><a class="btn btn-outline-danger" asp-action="DeleteMovieView" asp-route-id="@item.Id">Удалить</a></td>
+        </tr>
+    }
+</table>

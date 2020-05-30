@@ -28,6 +28,7 @@ namespace Web
                 .AddCookie(options => //CookieAuthenticationOptions
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
 
             services.AddControllersWithViews();
@@ -60,8 +61,8 @@ namespace Web
                     name: "about us",
                     pattern: "{controller=Home}/{action=AboutUs}");
                 endpoints.MapControllerRoute(
-                    name: "",
-                    pattern: "");
+                    name: "administrator",
+                    pattern: "{controller=Administrator}/{action}/{id?}");
             });
         }
     }

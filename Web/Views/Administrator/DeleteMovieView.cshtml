@@ -1,0 +1,15 @@
+﻿@model Web.ViewModels.MovieDeleteViewModel
+@{
+    ViewData["Title"] = "Удаление фильма";
+}
+
+<h1>Удаление фильма</h1>
+
+
+@Model.Id - @Model.Name
+<form asp-action="Delete" asp-route-id="@Model.Id">
+    <div class="form-group">
+        <input type="submit" class="btn btn-danger" value="Удалить" />
+    </div>
+</form>
+

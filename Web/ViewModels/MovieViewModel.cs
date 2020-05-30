@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Web.Models.DAL;
-using Web.ViewModels;
 
-namespace Web.DAL.Models
+namespace Web.ViewModels
 {
-    public class Movie : BaseViewEntity
+    public class MovieViewModel : BaseViewEntity
     {
         public string Name { get; set; }
 
@@ -20,14 +19,14 @@ namespace Web.DAL.Models
         public string Summary { get; set; }
 
         public int Price { get; set; }
-        public string Image { get; set; }
-        public List<ListOrder> ListOrders { get; set; }
-        public List<MovieGenre> MovieGenres { get; set; }
 
-        public Movie()
+        public string Image { get; set; }
+
+        public List<int> MovieGenres { get; set; }
+
+        public MovieViewModel()
         {
-            MovieGenres = new List<MovieGenre>();
-            ListOrders = new List<ListOrder>();
+            MovieGenres = new List<int>();
         }
     }
 }

@@ -1,0 +1,50 @@
+﻿@model Web.ViewModels.MovieViewModel
+@{
+    ViewData["Title"] = "Редактирование фильма";
+}
+
+<h1>Редактирование фильма</h1>
+
+<form asp-action="UpdateMovie" asp-controller="Administrator" asp-route-id="@Model.Id" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name">Название фильма </label>
+        <input type="text" asp-for="Name" class="form-control" />
+        <label asp-for="MovieGenres">Жанры фильма </label>
+        <select class="selectpicker" multiple data-live-search="true" asp-for="@Model.MovieGenres" asp-items="(List<SelectListItem>)ViewBag.Genres">
+        </select>
+        <label asp-for="ReleaseDate">Дата выпуска </label>
+        <input type="date" asp-for="ReleaseDate" class="form-control" />
+        <label asp-for="Country">Страна выпуска </label>
+        <input type="text" asp-for="Country" class="form-control" />
+        <label asp-for="Director">Режиссёр </label>
+        <input type="text" asp-for="Director" />
+        <label asp-for="Actors">Актеры </label>
+        <textarea asp-for="Actors"></textarea>
+        <label asp-for="Summary">Краткое содержание </label>
+        <textarea asp-for="Summary"></textarea>
+        <label asp-for="Price">Цена </label>
+        <input type="number" asp-for="Price" min="0" max="100" />
+        <label asp-for="Image">Изображение </label>
+        <div class="card col-3 p-0">
+           <img id="movieId" src="~/MovieImages/@Model.Image" class="card-img-top" style="height: 400px" alt="cardimg" />
+         </div>
+        <input id="inputFile" type="file" class="form-control-file" asp-for="Image" />
+    </div>
+    <div>
+        <input type="submit" value="Редактировать" />
+    </div>
+</form>
+
+  <script type="text/javascript">
+      document.getElementById('inputFile').onchange = () =>
+      {
+          var reader = new FileReader();
+
+          reader.onload = (e) => {
+              document.getElementById('movieId').src = e.target.result;
+          };
+
+          reader.readAsDataURL(document.getElementById('inputFile').files[0]);
+      }
+  </script>
+
