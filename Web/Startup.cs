@@ -58,11 +58,11 @@ namespace Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
-                    name: "about us",
-                    pattern: "{controller=Home}/{action=AboutUs}");
-                endpoints.MapControllerRoute(
                     name: "administrator",
                     pattern: "{controller=Administrator}/{action}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "movieDetails",
+                    pattern: "{controller=Home}/{action=MovieDetails}/{id?}");
             });
         }
     }

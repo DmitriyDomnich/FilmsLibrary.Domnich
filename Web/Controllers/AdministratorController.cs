@@ -65,11 +65,12 @@ namespace Web.Controllers
                 var fileName = ImageHelper.UploadImage(file, Path.Combine(this.environment.WebRootPath, "MovieImages"));
                 newMovie.Image = fileName;
             }
-
             db.Movies.Add(newMovie);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+
         public async Task<IActionResult> UpdateMovieView(int id)
         {
             var movie = await db.Movies.Include(f => f.MovieGenres).ThenInclude(f => f.Genre).FirstOrDefaultAsync(p => p.Id == id);

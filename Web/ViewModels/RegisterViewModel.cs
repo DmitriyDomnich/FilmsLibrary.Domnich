@@ -4,7 +4,8 @@ namespace Web.ViewModels
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Не указан Email")]
+        [EmailAddress (ErrorMessage = "Не указан Email")]
+        [StringLength(40, MinimumLength = 7, ErrorMessage = "Длина строки должна быть от 3 до 50 символов")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Не указан пароль")]

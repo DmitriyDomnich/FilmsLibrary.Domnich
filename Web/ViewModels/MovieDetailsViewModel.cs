@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 
 namespace Web.ViewModels
 {
-    public class MovieCardViewModel : BaseViewEntity
+    public class MovieDetailsViewModel : BaseViewEntity
     {
         public string Name { get; set; }
 
         public string Director { get; set; }
 
-        public DateTime ReleaseDate { get; set; }
+        public string Country { get; set; }
+
+        public DateTime RealeaseDate { get; set; }
 
         public int Price { get; set; }
 
@@ -19,7 +21,11 @@ namespace Web.ViewModels
 
         public List<string> MovieGenres { get; set; }
 
-        public MovieCardViewModel()
+        public string Actors { get; set; }
+
+        public string Summary { get; set; }
+
+        public MovieDetailsViewModel()
         {
             MovieGenres = new List<string>();
         }
