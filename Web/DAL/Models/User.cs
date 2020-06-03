@@ -22,9 +22,12 @@ namespace Web.DAL.Models
 
         public List<Order> Orders { get; set; }
 
+        public List<Reservation> Reservations { get; set; }
+
         public User()
         {
             Orders = new List<Order>();
+            Reservations = new List<Reservation>();
         }
     }
 }

@@ -1,68 +1,97 @@
 ﻿@model Web.ViewModels.MovieViewModel
 @{
     ViewData["Title"] = "AddMovieView";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-nav mx-auto">
+                <a class="nav-item nav-link" style="font-size: x-large" asp-action="Index" asp-controller="Administrator">Фильмотека</a>
+            </div>
+            <div class="dropdown">
+                <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Admin
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" asp-action="Logout" asp-controller="Account">Выход</a>
+                </div>
+            </div>
+        </nav>
+        <h1 class="text-center">Добавление фильма</h1>
 
-<h1>Добавление фильма</h1>
+        <form asp-action="AddMovie" enctype="multipart/form-data" asp-antiforgery="true">
+            <div class="form-group">
+                <div>
+                    <label asp-for="Name">Название фильма </label>
+                    <input type="text" asp-for="Name" class="form-control input-validation-error" />
+                    <span asp-validation-for="Name"></span>
+                </div>
+                <div>
+                    <label asp-for="MovieGenres">Жанры фильма </label>
+                    <select class="selectpicker" multiple data-live-search="true" asp-for="@Model.MovieGenres" asp-items="(List<SelectListItem>)ViewBag.Genres">
+                    </select>
+                </div>
+                <div>
+                    <label asp-for="ReleaseDate">Дата выпуска </label>
+                    <input type="date" asp-for="ReleaseDate" class="form-control" />
+                </div>
+                <div>
+                    <label asp-for="Country">Страна выпуска </label>
+                    <input type="text" asp-for="Country" class="form-control" size="40" />
+                </div>
+                <div>
+                    <label asp-for="Director">Режиссёр </label>
+                    <input type="text" asp-for="Director" size="40" />
+                </div>
+                <div>
+                    <label asp-for="Actors">Актеры </label>
+                    <textarea asp-for="Actors" cols="50" rows="3"></textarea>
+                </div>
+                <div>
+                    <label asp-for="Summary">Краткое содержание </label>
+                    <textarea asp-for="Summary" cols="100" rows="6"></textarea>
+                </div>
+                <div>
+                    <label asp-for="Price">Цена </label>
+                    <input type="number" asp-for="Price" min="0" max="100" />
+                </div>
 
-<form asp-action="AddMovie" enctype="multipart/form-data" asp-antiforgery="true">
-    <div class="form-group">
-        <div class="validation" asp-validation-summary="ModelOnly"></div>
+                <div>
+                    <label asp-for="Image">Изображение </label>
+                    <input type="file" class="form-control-file" asp-for="Image" />
+                </div>
 
-        <div>
-            <label asp-for="Name">Название фильма </label>
-            <input type="text" asp-for="Name" class="form-control input-validation-error" />
-            <span asp-validation-for="Name"></span>
-        </div>
+                <div>
+                    <input type="submit" value="Добавить" />
+                </div>
+            </div>
 
-        <div>
-            <label asp-for="MovieGenres">Жанры фильма </label>
-            <select class="selectpicker" multiple data-live-search="true" asp-for="@Model.MovieGenres" asp-items="(List<SelectListItem>)ViewBag.Genres">
-            </select>
-            <span asp-validation-for="MovieGenres"></span>
-        </div>
+        </form>
+    </div>  
+</body>
+</html>
 
-        <div>
-            <label asp-for="ReleaseDate">Дата выпуска </label>
-            <input type="date" asp-for="ReleaseDate" class="form-control" />
-            <span asp-validation-for="ReleaseDate"></span>
-        </div>
-        <div>
-            <label asp-for="Country">Страна выпуска </label>
-            <input type="text" asp-for="Country" class="form-control" />
-            <span asp-validation-for="Country"></span>
-        </div>
-        <div>
-            <label asp-for="Director">Режиссёр </label>
-            <input type="text" asp-for="Director" />
-            <span asp-validation-for="Director"></span>
-        </div>
-        <div>
-            <label asp-for="Actors">Актеры </label>
-            <textarea asp-for="Actors"></textarea>
-            <span asp-validation-for="Actors"></span>
-        </div>
-        <div>
-            <label asp-for="Summary">Краткое содержание </label>
-            <textarea asp-for="Summary"></textarea>
-        </div>
-        <div>
-            <label asp-for="Price">Цена </label>
-            <input type="number" asp-for="Price" min="0" max="50" />
-        </div>
-        <div>
-            <label asp-for="Image">Изображение </label>
-            <input type="file" class="form-control-file" asp-for="Image" />
-            <span asp-validation-for="Image"></span>
-        </div>
-
-    </div>
-    <div>
-        <input type="submit" value="Добавить" />
-    </div>
-</form>
-@section scripts{
-
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>

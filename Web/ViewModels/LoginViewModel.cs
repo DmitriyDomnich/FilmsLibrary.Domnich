@@ -4,7 +4,8 @@ namespace Web.ViewModels
 {
     public class LoginViewModel
     {
-        [EmailAddress (ErrorMessage = "Не указан Email.")]
+        [Required(ErrorMessage = "Не указан электронный адрес")]
+        [EmailAddress(ErrorMessage = "Некорректный электронный адрес")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Не указан пароль")]

@@ -31,6 +31,8 @@ namespace Web
                     options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
 
+            services.AddControllers();
+            services.AddHttpContextAccessor();
             services.AddControllersWithViews();
         }
 
@@ -45,6 +47,7 @@ namespace Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -54,6 +57,7 @@ namespace Web
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -63,6 +67,12 @@ namespace Web
                 endpoints.MapControllerRoute(
                     name: "movieDetails",
                     pattern: "{controller=Home}/{action=MovieDetails}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "movieDetails",
+                    pattern: "{controller=Home}/{action=CartView}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "genres",
+                    pattern: "{controller=Home}/{action=GenresView}/{id?}");
             });
         }
     }

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MovieCardViewModel>
+@{
+    ViewData["Title"] = "MovieSearch";
+    Layout = "~/Views/Shared/DoubleNavbarLayout.cshtml";
+}
+
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="card col-4 mt-3 p-0">
+                    <img src="~/MovieImages/@item.Image" class="card-img-top" style="height: 400px" alt="piss" />
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@item.Name</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            Дата релиза: @item.ReleaseDate.ToString("MM/dd/yyyy")
+                        </li>
+                        <li class="list-group-item">
+                            @{
+                                string genres = String.Join(", ", item.MovieGenres);
+                            }
+                            Жанры: @genres
+                        </li>
+                        <li class="list-group-item">
+                            Режиссёр: @item.Director
+                        </li>
+                        <li class="list-group-item">
+                            Цена: @item.Price$
+                        </li>
+                        <li class="list-group-item mx-auto mt-1">
+                            <a class="btn btn-info" asp-action="MovieDetails" asp-controller="Home" asp-route-id="@item.Id">Детали</a>
+                        </li>
+                    </ul>
+                </div>
+            }
+        </div>
+        <footer class="bg-dark container" style="position: fixed; bottom: 0">
+            <div class="container-fluid text-center text-md-left">
+                <div class="bg-dark text-center py-3" style="color:white">
+                    © 2020 Copyright:
+                    <a asp-action="Index" asp-controller="Home">Filmoteka.com</a>
+                </div>
+            </div>
+        </footer>
+    </div>

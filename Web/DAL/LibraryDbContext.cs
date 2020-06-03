@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading.Tasks;
 using Web.DAL.Models;
 
 namespace Web.DAL
@@ -20,6 +18,8 @@ namespace Web.DAL
         public DbSet<ListOrder> ListOrders { get; set; }
 
         public DbSet<Role> Roles { get; set; }
+
+        public DbSet<Reservation> Reservations { get; set; }
 
 
         public LibraryDbContext(DbContextOptions<LibraryDbContext> options)

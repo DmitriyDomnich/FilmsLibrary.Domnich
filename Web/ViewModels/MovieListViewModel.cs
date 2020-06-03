@@ -15,7 +15,7 @@ namespace Web.ViewModels
 
         public string Director { get; set; }
 
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
         public List<string> MovieGenres { get; set; }
 

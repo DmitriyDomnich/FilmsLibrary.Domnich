@@ -13,7 +13,7 @@ namespace Web.ViewModels
 
         public DateTime ReleaseDate { get; set; }
 
-        public int Price { get; set; }
+        public decimal Price { get; set; }
 
         public string Image { get; set; }
 

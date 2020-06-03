@@ -1,13 +1,28 @@
 ﻿@model Web.ViewModels.MovieDeleteViewModel
 @{
     ViewData["Title"] = "Удаление фильма";
+    
 }
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="navbar-nav mx-auto">
+            <a class="nav-item nav-link" style="font-size: x-large" asp-action="Index" asp-controller="Administrator">Фильмотека</a>
+        </div>
+        <div class="dropdown">
+            <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admin
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" asp-action="Logout" asp-controller="Account">Выход</a>
+            </div>
+        </div>
+    </nav>
+<h1 class="mx-auto">Удаление фильма</h1>
+<div class="mx-auto">
+    @Model.Id - @Model.Name
+</div>
 
-<h1>Удаление фильма</h1>
 
-
-@Model.Id - @Model.Name
-<form asp-action="Delete" asp-route-id="@Model.Id">
+<form asp-action="Delete" asp-route-id="@Model.Id" class="my-auto mx-auto">
     <div class="form-group">
         <input type="submit" class="btn btn-danger" value="Удалить" />
     </div>
