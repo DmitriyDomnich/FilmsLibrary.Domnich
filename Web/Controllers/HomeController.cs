@@ -30,7 +30,7 @@ namespace Web.Controllers
             db = context;
             _httpContextAccessor = httpContextAccessor;
         }
-        [Authorize(Roles = "user")]
+        [Authorize]
         public async Task<IActionResult> Index(int page = 1)
         {
             int pageSize = 9;
