@@ -1,0 +1,175 @@
+﻿@using Newtonsoft.Json;
+
+@model IEnumerable<Web.ViewModels.ShoppingCartViewModel>
+@{
+    ViewData["Title"] = "CartView";
+    Layout = null;
+}
+@addTagHelper *, Web
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span style="color:honeydew">Подпишись</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">
+                    <svg class="bi bi-cursor" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103zM2.25 8.184l3.897 1.67a.5.5 0 0 1 .262.263l1.67 3.897L12.743 3.52 2.25 8.184z" />
+                    </svg>Telegram
+                </a>
+                <a class="dropdown-item" href="#"><img src="~/Icons/facebook.jfif" alt="facepiss" width="15em" height="15em" />Facebook</a>
+                <a class="dropdown-item" href="#"><img src="~/Icons/VK.png" alt="vkpiss" width="20em" height="20em" />ВКонтакте</a>
+            </div>
+            <div class="navbar-nav mx-auto">
+                <a class="nav-item nav-link" style="font-size: x-large" asp-action="Index" asp-controller="Home">Фильмотека</a>
+            </div>
+            <div class="dropdown">
+                <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @User.Identity.Name
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" asp-action="Logout" asp-controller="Account">Выход</a>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-light">
+            <ul id="multicol-menu" class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" role="button" style="color:black" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Фильмы </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <h6 class="dropdown-header">Жанры</h6>
+                            <div class="row" style="width: 675px;">
+                                <ul class="list-unstyled col-md-3">
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="26">Боевик</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="27">Вестерн</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="28">Гангстерские</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="29">Детектив</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="43">Катастрофа</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="44">Биографические</a></li>
+                                </ul>
+                                <ul class="list-unstyled col-md-3">
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="24">Драма</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="30">Исторические</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="34">Нуар</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="39">Трагикомедия</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="45">Криминал</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="42">Ужасы</a></li>
+                                </ul>
+                                <ul class="list-unstyled col-md-3">
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="31">Комедия</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="32">Мелодрама</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="33">Мюзикл</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="35">Политические</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="40">Триллер</a></li>
+                                </ul>
+                                <ul class="list-unstyled col-md-3">
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="36">Приключение</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="25">Мультфильм</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="37">Сказка</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="38">Трагедия</a></li>
+                                    <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="41">Фантастика</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: black">Жанры</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="CartView" asp-controller="Home" style="color: black">Корзина <span id="shCart">@ViewBag.ReservationsCount</span> </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: black">Про нас</a>
+                </li>
+            </ul>
+        </nav>
+        <h2 class="mt-3">
+            Корзина
+        </h2>
+        <table class="table">
+            <tr>
+                <td><b>Фото</b></td>
+                <td><b>Название</b></td>
+                <td><b>Количество</b></td>
+                <td><b>Цена</b></td>
+            </tr>
+            @{
+                decimal totalPrice = 0;
+                int totalAmount = 0;
+            }
+
+            @foreach (var item in Model)
+            {
+                <tr id="@item.MovieId">
+                    <td><img src="~/MovieImages/@item.Image" style="height: 200px; width: 200px" alt="cart_img" /></td>
+                    @{
+                        int amount = item.Amount;
+                        totalAmount += item.Amount;
+                        totalPrice += item.Price * amount;
+                    }
+                    <td>@item.Name</td>
+                    <td>@item.Amount</td>
+                    <td>@item.Price</td>
+                    <td><a class="btn btn-outline-danger" onclick="deleteOrder(@JsonConvert.SerializeObject(item))">Удалить</a></td>
+                </tr>
+            }
+        </table>
+        <div style="margin-bottom:100px">
+            <div>
+                <p class="text-right">
+                    Всего: <span id="totalAmount">@totalAmount</span>
+                </p>
+                <p class="text-right">
+                    Общая цена: <span id="totalPrice">@totalPrice</span>
+                </p>
+            </div>
+            <div class="d-flex justify-content-end">
+                <a class="btn btn-primary mb-3 " asp-action="CreateListOrders" asp-controller="Home" asp-route-model="@Model">Оформить заказ</a>
+            </div>
+        </div>
+        
+        
+        <footer class="bg-dark container" style="position:absolute; bottom:0; margin-top: -50px">
+            <div class="container-fluid text-center text-md-left">
+                <div class="bg-dark text-center py-3" style="color:white">
+                    © 2020 Copyright:
+                    <a asp-action="Index" asp-controller="Home">Filmoteka.com</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+    function deleteOrder(movie) {
+        fetch(`http://localhost:5000/api/ShoppingCart/${movie.MovieId}`, {
+            method: 'DELETE',
+            cache: 'no-cache',
+        }).then(() => {
+            var amountEl = document.getElementById("totalAmount");
+            var priceEl = document.getElementById("totalPrice");
+            var totalAm = +amountEl.innerText - movie.Amount;
+            var totalPr = +priceEl.innerText - movie.Price * movie.Amount;
+            priceEl.innerText = totalPr;
+            amountEl.innerText = totalAm;
+            var elem = document.getElementById(movie.MovieId);
+            elem.remove();
+        });
+    }
+</script>

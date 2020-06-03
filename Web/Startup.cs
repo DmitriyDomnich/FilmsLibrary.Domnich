@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,16 @@ namespace Web
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<LibraryDbContext>(options => options.UseSqlServer(connection));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                    options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
+
+            services.AddControllers();
+            services.AddHttpContextAccessor();
             services.AddControllersWithViews();
         }
 
@@ -36,17 +47,32 @@ namespace Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "administrator",
+                    pattern: "{controller=Administrator}/{action}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "movieDetails",
+                    pattern: "{controller=Home}/{action=MovieDetails}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "movieDetails",
+                    pattern: "{controller=Home}/{action=CartView}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "genres",
+                    pattern: "{controller=Home}/{action=GenresView}/{id?}");
             });
         }
     }

@@ -1,0 +1,51 @@
+﻿@{ 
+    Layout = "~/Views/Shared/DoubleNavbarLayout.cshtml";
+}
+
+@model Web.ViewModels.MovieDetailsViewModel
+
+@{
+    string genres = String.Join(", ", Model.MovieGenres);
+}
+    <div class="card col-12 mt-3">
+        <div class="row no-gutters">
+            <div class="col-4">
+                <img src="~/MovieImages/@Model.Image" alt="movieImage" height="500px" style="max-width: 350px" />
+            </div>
+            <div class="col-8">
+                <div class="card-body">
+                    <h3 class="card-title">@Model.Name</h3>
+                    <p class="card-text">
+                        <b>Жанры:</b> @genres
+                    </p>
+                    <p class="card-text">
+                        <b>Дата релиза:</b> @Model.RealeaseDate.ToString("MM/dd/yyyy");
+                    </p>
+                    <p class="card-text">
+                        <b>Режиссёр:</b> @Model.Director
+                    </p>
+                    <p class="card-text">
+                        <b>Страна:</b> @Model.Country
+                    </p>
+                    <p class="card-text">
+                        <b>В главных ролях:</b> @Model.Actors
+                    </p>
+                    <p class="card-text">
+                        <b>
+                            Про что фильм «@Model.Name»:
+                        </b>
+                        @Model.Summary
+                    </p>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-dark container" style="position: fixed; bottom: 0;">
+            <div class="container-fluid text-center text-md-left">
+                <div class="bg-dark text-center py-3" style="color:white">
+                    © 2020 Copyright:
+                    <a asp-action="Index" asp-controller="Home">Filmoteka.com</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
