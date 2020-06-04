@@ -73,6 +73,9 @@ namespace Web
                 endpoints.MapControllerRoute(
                     name: "genres",
                     pattern: "{controller=Home}/{action=GenresView}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "aboutUs",
+                    pattern: "{controller=Home}/{action=AboutUs}/{id?}");
             });
         }
     }

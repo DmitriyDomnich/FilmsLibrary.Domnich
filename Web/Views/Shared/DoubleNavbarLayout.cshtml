@@ -17,15 +17,13 @@
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="28">Гангстерские</a></li>
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="29">Детектив</a></li>
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="43">Катастрофа</a></li>
-                            <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="44">Биографические</a></li>
                         </ul>
                         <ul class="list-unstyled col-md-3">
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="24">Драма</a></li>
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="30">Исторические</a></li>
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="34">Нуар</a></li>
-                            <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="39">Трагикомедия</a></li>
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="45">Криминал</a></li>
-                            <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="42">Ужасы</a></li>
+                            <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="44">Биографические</a></li>
                         </ul>
                         <ul class="list-unstyled col-md-3">
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="31">Комедия</a></li>
@@ -38,21 +36,21 @@
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="36">Приключение</a></li>
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="25">Мультфильм</a></li>
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="37">Сказка</a></li>
-                            <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="38">Трагедия</a></li>
                             <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="41">Фантастика</a></li>
+                            <li><a class="dropdown-item" asp-action="MoviesOfGenre" asp-route-id="42">Ужасы</a></li>
                         </ul>
                     </div>
                 </li>
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Жанры</a>
+            <a class="nav-link" asp-action="GenresView" asp-controller="Home" style="color: black">Жанры</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" asp-action="CartView" asp-controller="Home" style="color: black">Корзина <span id="shCart">@ViewBag.ReservationsCount</span> </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" style="color: black">Про нас</a>
+            <a class="nav-link" asp-action="AboutUs" asp-controller="Home" style="color: black">Про нас</a>
         </li>
     </ul>
     <form id="search" class="form-inline my-2 my-lg-0" asp-action="MovieSearch" asp-controller="Home">

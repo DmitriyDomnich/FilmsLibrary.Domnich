@@ -33,6 +33,13 @@ namespace Web.Controllers
         [Authorize]
         public async Task<IActionResult> Index(int page = 1)
         {
+            var user = await GetUserAsync();
+
+            if (user.RoleId == 3)
+            {
+                return RedirectToAction("Index", "Administrator");
+            }
+
             int pageSize = 9;
 
             var count = await this.db.Movies.CountAsync();
@@ -63,12 +70,11 @@ namespace Web.Controllers
 
             return View(viewModel);
         }
-        //[Authorize]
-        //public async Task<IActionResult> GenresView()
-        //{
-        //    var 
-        //    return View();
-        //}
+        [Authorize]
+        public IActionResult GenresView()
+        {
+            return View();
+        }
         [Authorize]
         public async Task<IActionResult> MovieSearch()
         {
@@ -91,11 +97,10 @@ namespace Web.Controllers
                 Price = f.Price,
                 ReleaseDate = f.ReleaseDate
             }).ToList();
-
-            
-
-
+            ViewData["Title"] = $"Поиск фильма {movieName}";
             ViewBag.Name = movieName;
+            var userName = this.HttpContext.User.Identity.Name;
+            ViewBag.ReservationsCount = await this.db.Reservations.Where(f => f.User.Email == userName).SumAsync(f => f.Amount);
             return View(result);
         }
 
@@ -120,25 +125,19 @@ namespace Web.Controllers
                     Summary = movie.Summary
                 };
                 ViewData["Title"] = result.Name;
+                var userName = this.HttpContext.User.Identity.Name;
+                ViewBag.ReservationsCount = await this.db.Reservations.Where(f => f.User.Email == userName).SumAsync(f => f.Amount);
                 return View(result);
             }
-
+           
             return NotFound();
         }
         [Authorize]
         public async Task<IActionResult> MoviesOfGenre(int id, int page = 1)
         {
-
-            int pageSize = 9;
-
             var movies = await db.Movies
                 .Where(f => f.MovieGenres.Any(g => g.GenreId == id)).Include(f => f.MovieGenres).ThenInclude(f => f.Genre).ToListAsync();
-
-            var count = movies.Count();
-            var items = movies.Skip((page - 1) * pageSize).Take(pageSize);
-
-
-            List<MovieCardViewModel> result = items.Select(f => new MovieCardViewModel
+            List<MovieCardViewModel> result = movies.Select(f => new MovieCardViewModel
             {
                 MovieGenres = f.MovieGenres.Select(f => f.Genre.Name).ToList(),
                 Name = f.Name,
@@ -154,15 +153,11 @@ namespace Web.Controllers
                 ViewBag.Message = "Фильмы такого жанра отсутствуют, наверное они редкие.";
                 return View("~/Views/Home/NullEntityView.cshtml");
             }
+            ViewData["Title"] = "Фильма жанра";
 
-            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel
-            {
-                PageViewModel = pageViewModel,
-                Movies = result
-            };
-
-            return View(viewModel);
+            var userName = this.HttpContext.User.Identity.Name;
+            ViewBag.ReservationsCount = await this.db.Reservations.Where(f => f.User.Email == userName).SumAsync(f => f.Amount);
+            return View(result);
         }
         [Authorize]
         public async Task<IActionResult> CartView()
@@ -182,13 +177,12 @@ namespace Web.Controllers
                 Price = f.Movie.Price,
                 Amount = f.Amount
             }).ToList();
-
+            ViewData["Title"] = "Корзина";
             if (result.Count == 0)
             {
                 ViewBag.Message = "Ваша корзина пуста.";
                 return View("~/Views/Home/NullEntityView.cshtml");
             }
-
             return View(result);
         }
 
@@ -214,7 +208,10 @@ namespace Web.Controllers
 
             return View();
         }
-
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
