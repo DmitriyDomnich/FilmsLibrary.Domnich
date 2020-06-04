@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "AboutUs";
+    Layout = "~/Views/Shared/DoubleNavbarLayout.cshtml";
+}
+
+<p class="mt-3">
+    <a class="btn btn-dark" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Про нас</a>
+</p>
+<div class="row">
+    <div class="col">
+        <div class="collapse multi-collapse" id="multiCollapseExample1">
+            <div class="card card-body">
+                Мы, ребята из Filmoteka.com, стараемся как можем, что бы вы, наши клиенты, могли найти те фильмы которые вы хотите, и посмотреть их почти бесплатно.
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer class="bg-dark container" style="position: fixed; bottom: 0;">
+    <div class="container-fluid text-center text-md-left">
+        <div class="bg-dark text-center py-3" style="color:white">
+            © 2020 Copyright:
+            <a asp-action="Index" asp-controller="Home">Filmoteka.com</a>
+        </div>
+    </div>
+</footer>
