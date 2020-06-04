@@ -47,7 +47,7 @@ namespace Web.Controllers
                         return RedirectToAction("Index", "Home");
                     }
                 }
-                ModelState.AddModelError("", "Некорректные логин и(или) пароль.");
+                ModelState.AddModelError("", "Не правильный логин или пароль.");
             }
             return View(model);
         }

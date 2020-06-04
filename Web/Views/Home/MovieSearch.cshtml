@@ -30,14 +30,15 @@
                             Цена: @item.Price$
                         </li>
                         <li class="list-group-item mx-auto mt-1">
-                            <a class="btn btn-info" asp-action="MovieDetails" asp-controller="Home" asp-route-id="@item.Id">Детали</a>
+                            <a class="btn btn-info mt-2 mx-auto" asp-action="MovieDetails" asp-controller="Home" asp-route-id="@item.Id">Детали</a>
+                            <a class="btn btn-success mt-2 mx-auto" onclick="addOrder(@item.Id)">В корзину</a>
                         </li>
                     </ul>
                 </div>
             }
         </div>
-        <footer class="bg-dark container" style="position: fixed; bottom: 0">
-            <div class="container-fluid text-center text-md-left">
+        <footer class="bg-dark container">
+            <div class="container-fluid text-center text-md-left mt-3">
                 <div class="bg-dark text-center py-3" style="color:white">
                     © 2020 Copyright:
                     <a asp-action="Index" asp-controller="Home">Filmoteka.com</a>

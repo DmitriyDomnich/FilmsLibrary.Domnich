@@ -32,7 +32,8 @@
                             Цена: @item.Price$
                         </li>
                         <li class="list-group-item mx-auto mt-1">
-                            <a class="btn btn-info" asp-action="MovieDetails" asp-controller="Home" asp-route-id="@item.Id">Детали</a>
+                            <a class="btn btn-info mt-2 mx-auto" asp-action="MovieDetails" asp-controller="Home" asp-route-id="@item.Id">Детали</a>
+                            <a class="btn btn-success mt-2 mx-auto" onclick="addOrder(@item.Id)">В корзину</a>
                         </li>
                     </ul>
                 </div>
